@@ -1,3 +1,3 @@
 export * from "./types";
-export * from "./optimistic";
+export * from "./core";
 export * from "./utils";

@@ -1,7 +1,7 @@
 import { QueryClient, QueryKey } from "@tanstack/react-query";
-import { ItemOf } from "../types/types";
-import { getRollbackFn } from "../utils/getRollbackFn";
-import { getReplaceItemFn } from "../utils/getReplaceItemFn";
+import { ItemOf } from "../../types/types";
+import { getRollbackFn } from "../../utils/getRollbackFn";
+import { getReplaceItemFn } from "../../utils/getReplaceItemFn";
 
 type OptimisticUpdateFnParams<T extends object | object[]> = {
   matchFn: (item: ItemOf<T>) => boolean;
