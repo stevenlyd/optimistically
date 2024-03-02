@@ -51,6 +51,12 @@ export class Optimistically<T extends object, K extends object> {
         if (itemExists) {
           return replaceItemFn(currentState);
         }
+      } else {
+        const singleItem = currentState;
+
+        if (singleItem && matchFn(singleItem)) {
+          return { ...singleItem, ...optimisticData };
+        }
       }
       return currentState;
     });
