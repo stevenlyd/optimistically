@@ -1,7 +1,9 @@
 import { QueryClient, QueryKey } from "@tanstack/react-query";
-import { mapItem } from "./mapItem";
 
-interface GetOnSuccessFnParams<T extends object, D extends Partial<T> = Partial<T>> {
+interface GetOnSuccessFnParams<
+  T extends object,
+  D extends Partial<T> = Partial<T>
+> {
   queryClient: QueryClient;
   mainQueryKey: QueryKey;
   getChildQueryKeyFn?: (item: T) => QueryKey;
@@ -9,15 +11,28 @@ interface GetOnSuccessFnParams<T extends object, D extends Partial<T> = Partial<
   optimisticData: D | D[];
 }
 
-export const getOnSuccessFn = <T extends object, D extends Partial<T> = Partial<T>>(
+export const getOnSuccessFn = <
+  T extends object,
+  D extends Partial<T> = Partial<T>
+>(
   params: GetOnSuccessFnParams<T, D>
 ) => {
-  const { queryClient, mainQueryKey, getChildQueryKeyFn, optimisticData, getUniqueId } = params;
+  const {
+    queryClient,
+    mainQueryKey,
+    getChildQueryKeyFn,
+    optimisticData,
+    getUniqueId,
+  } = params;
 
-  const normalizedData = Array.isArray(optimisticData) ? optimisticData : [optimisticData];
+  const normalizedData = Array.isArray(optimisticData)
+    ? optimisticData
+    : [optimisticData];
 
   return (returnedData: T | T[]) => {
-    const normalizedReturnedData = Array.isArray(returnedData) ? returnedData : [returnedData];
+    const normalizedReturnedData = Array.isArray(returnedData)
+      ? returnedData
+      : [returnedData];
 
     if (getChildQueryKeyFn) {
       normalizedReturnedData.forEach((item) => {
@@ -49,7 +64,9 @@ export const getOnSuccessFn = <T extends object, D extends Partial<T> = Partial<
         } else if (!Array.isArray(returnedData)) {
           return returnedData;
         } else {
-          throw new Error(`Cannot map returned data to query key:[${mainQueryKey}]`);
+          throw new Error(
+            `Cannot map returned data to query key:[${mainQueryKey}]`
+          );
         }
       }
       return oldItems;

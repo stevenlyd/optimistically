@@ -24,11 +24,11 @@ const dto: People = {
 const { rollbackFn, onSettledFn, onSuccessFn } = testOptimisticUpdate({
   payload: {
     data: dto,
-    getPayloadItemId: (item) => item.id.toString(),
+    getItemId: (item) => item.id.toString(),
   },
   queryClient,
   mainQueryKey: ['1'],
   queryData: {
-    getQueryItemId: (item: People) => item.id.toString(),
+    getItemId: (item: People) => item.id.toString(),
   }
 })

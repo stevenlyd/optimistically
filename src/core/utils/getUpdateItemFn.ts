@@ -14,7 +14,9 @@ type GetUpdateItemFnParams<T extends object> = {
  * @param {(item: T) => boolean} params.matchFn - The function used to determine if an item matches the specified condition.
  * @returns {{ itemExists: boolean, updateItemFn: (oldItems: T[] | undefined) => T[] | undefined }} - An object containing the information about the item existence and the updateitem function.
  */
-export const getUpdateItemFn = <T extends object>(params: GetUpdateItemFnParams<T>) => {
+export const getUpdateItemFn = <T extends object>(
+  params: GetUpdateItemFnParams<T>
+) => {
   const { array, item, matchFn } = params;
   const index = array.findIndex(matchFn);
 

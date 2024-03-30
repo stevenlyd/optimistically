@@ -8,13 +8,18 @@ interface GetOnSettledFnParams<T extends object> {
   optimisticData: T | T[];
 }
 
-export const getOnSettledFn = <T extends object>(params: GetOnSettledFnParams<T>) => {
-  const { queryClient, mainQueryKey, getChildQueryKeyFn, optimisticData } = params;
+export const getOnSettledFn = <T extends object>(
+  params: GetOnSettledFnParams<T>
+) => {
+  const { queryClient, mainQueryKey, getChildQueryKeyFn, optimisticData } =
+    params;
 
   return async () => {
     await Promise.all([
       queryClient.invalidateQueries({ queryKey: mainQueryKey }),
-      ...(getChildQueryKeyFn ? mapItem(optimisticData, (i) => getChildQueryKeyFn(i)) : []),
+      ...(getChildQueryKeyFn
+        ? mapItem(optimisticData, (i) => getChildQueryKeyFn(i))
+        : []),
     ]);
   };
 };

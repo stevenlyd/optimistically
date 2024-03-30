@@ -31,8 +31,11 @@ interface GetRollbackFnParams<T extends object> {
   getChildQueryKeyFn?: (item: T) => QueryKey;
 }
 
-export const getRollbackFn = <T extends object>(params: GetRollbackFnParams<T>) => {
-  const { queryClient, previousData, mainQueryKey, getChildQueryKeyFn } = params;
+export const getRollbackFn = <T extends object>(
+  params: GetRollbackFnParams<T>
+) => {
+  const { queryClient, previousData, mainQueryKey, getChildQueryKeyFn } =
+    params;
 
   const rollbackFn = getQueryRollbackFn({
     queryClient,
@@ -44,7 +47,9 @@ export const getRollbackFn = <T extends object>(params: GetRollbackFnParams<T>) 
     ? mapItem(previousData, (item) => {
         if (item) {
           const childQueryKey = getChildQueryKeyFn(item);
-          const previousChildData = structuredClone(queryClient.getQueryData<T>(childQueryKey));
+          const previousChildData = structuredClone(
+            queryClient.getQueryData<T>(childQueryKey)
+          );
           return getQueryRollbackFn({
             queryClient,
             queryKey: childQueryKey,
@@ -55,6 +60,9 @@ export const getRollbackFn = <T extends object>(params: GetRollbackFnParams<T>) 
     : [];
 
   return async () => {
-    await Promise.all([rollbackFn(), ...childQueryRollbackFns.map((fn) => fn?.())]);
+    await Promise.all([
+      rollbackFn(),
+      ...childQueryRollbackFns.map((fn) => fn?.()),
+    ]);
   };
 };
