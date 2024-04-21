@@ -1,3 +1,3 @@
-export * from "./optimistic-create";
-export * from "./optimistic-update";
-export * from "./optimistic-delete";
+export * from "./create";
+export * from "./update";
+export * from "./delete";
