@@ -1,2 +1,2 @@
 Optimistically
-Optimistic update made easy!
+A set of utility functions for optimistic update/create/delete with TanStack Query.
